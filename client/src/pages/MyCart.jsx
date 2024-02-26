@@ -31,6 +31,7 @@ const MyCart = () => {
   }
 
   return (
+    // Check
     <Container className='p-4'>
       <div className='border border-2 border-opacity-50 d-grid gap-2 border-dark mt-3 p-2 rounded'>
         {cart.map((item, i) => (
