@@ -9,7 +9,7 @@ const CartItem = ({ item, setTotal }) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        // setTotal(prev => prev + qty * Number(item.productPrice))
+        setTotal(prev => prev + qty * Number(item.productPrice))
     }, [qty])
     return (
         <div className='container border border-2 border-dark d-flex p-2 justify-content-between align-items-center rounded'>
@@ -30,8 +30,8 @@ const CartItem = ({ item, setTotal }) => {
                     <button
                         className='p-0 total-p bg-danger px-2 mt-1 rounded'
                         onClick={() => {
-                            setQty(prev => (prev === 1) ? 0 : prev - 1)
-                            // (qty > 0 && setTotal(prev => prev - Number(item.productPrice)))
+                            setQty(prev => (prev === 1 || prev === 0) ? 1 : prev - 1)
+                            setTotal(prev => prev - Number(item.productPrice))
                         }}
                     >
                         -

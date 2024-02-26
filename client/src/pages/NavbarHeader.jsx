@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from "../store/slice/UserSlice.js"
 import { toast } from 'react-toastify';
+import { logout } from '../assets/index.js';
 
 function NavbarHeader() {
   const location = useLocation(); // once ready it returns the 'window.location' object
@@ -50,7 +51,7 @@ function NavbarHeader() {
             }}
               variant={`${(user) ? "danger" : "success"}`}
               className='text-center'
-            >{user ? "Logout" : "Login/Signup"}</Button>
+            >{user ? "Logout" : "Login/Signup"} <img src={logout} alt='logout' className='logout-img' /></Button>
           </div>
         </Navbar.Collapse>
       </Container>

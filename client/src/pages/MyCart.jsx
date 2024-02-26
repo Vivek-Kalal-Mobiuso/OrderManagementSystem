@@ -40,7 +40,8 @@ const MyCart = () => {
       {/* <div className='border border-2 border-opacity-50 p-2 mt-2'>
           <h2>Your Grand Total is : {total}</h2>
       </div> */}
-      <div className='text-end mt-2'>
+      <div className='text-end d-flex justify-content-between p-2 mt-2 border border-2'>
+        <h1>Your Grand Total is : {total}</h1>
         <Button variant='success' onClick={() => {
           if(!token) {
             toast.error("Please login First")

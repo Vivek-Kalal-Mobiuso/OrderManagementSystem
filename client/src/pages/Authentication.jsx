@@ -37,7 +37,7 @@ function Authentication() {
                     res.then((result) => {
                         console.log(result);
                         // dispatch(setUser())
-                        navigate("/")
+                        navigate(-1)
                     }).catch((e) => {
                         navigate("/auth")
                     })
@@ -54,7 +54,7 @@ function Authentication() {
                     res.then((data) => {
                         console.log("hi");
                         dispatch(setUser(data))
-                        navigate("/")
+                        navigate(-1)
                     }).catch((e) => {
                         navigate("/auth")
                     })
