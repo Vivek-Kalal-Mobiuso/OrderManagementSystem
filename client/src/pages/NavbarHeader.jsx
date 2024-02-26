@@ -38,7 +38,7 @@ function NavbarHeader() {
             </div>
           </Nav>
 
-          <div className='text-center mt-sm-4 mt-lg-0 mt-4'>
+          <div className='text-center mt-sm-4 mt-lg-0 mt-4 mr-4'>
             <Button onClick={() => {
               if (user) {
                 console.log("hi")
@@ -48,10 +48,10 @@ function NavbarHeader() {
                 navigate("/auth")
               }
             }}
+              variant={`${(user) ? "danger" : "success"}`}
               className='text-center'
-            >{user ? user.customerUsername : "Login/Signup"}</Button>
+            >{user ? "Logout" : "Login/Signup"}</Button>
           </div>
-
         </Navbar.Collapse>
       </Container>
     </Navbar>
