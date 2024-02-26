@@ -12,12 +12,9 @@ export async function registerCustomer(customerDetails) {
             },
         }
         try {
-            console.log(customerDetails);
             const result = await axios.post("/api/v1/customers", customerDetails, config);
-            console.log(result);
             resolve(result)
         } catch (error) {
-            console.log(error);
             reject(error.message)
         }
     })
@@ -33,11 +30,9 @@ export async function loginCustomer(customerDetails) {
         }
         setTimeout(async () => {
             try {
-                console.log(customerDetails);
                 const { data } = await axios.post("/api/v1/customers/login", customerDetails, config);
                 resolve(data)
             } catch (error) {
-                console.log(error);
                 reject(error.message)
             }
         }, 2000)

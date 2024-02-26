@@ -31,7 +31,6 @@ function NavbarComp() {
                 My Cart
               </Link>
               <span style={{ color: "white" }} className='bg-primary rounded-5 px-1'>{cart.length}</span>
-
             </div>
           </Nav>
           <Button onClick={() => {
