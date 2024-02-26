@@ -1,0 +1,46 @@
+.nav-custom {
+    padding: 10px;
+    gap: 2em;
+}
+
+.nav-links {
+    text-decoration: none;
+}
+
+.logo {
+    cursor: pointer;
+}
+
+.logo span {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(250, 135, 0, 1) 46%, rgb(220, 220, 220) 79%);
+    -webkit-background-clip: text;
+    color: transparent;
+    /* Hide the original text */
+    display: inline-block;
+    font-weight: 700;
+}
+
+.active {
+    color: aliceblue;
+}
+
+.cart-div{
+    /* position: relative; */
+}
+
+.cart{
+    position: absolute;
+}
+
+.nav-bg{
+    background: white;
+}
+
+.nav-new{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    font-weight: 600;
+    font-size: large;
+}

@@ -1,0 +1,31 @@
+.auth-container {
+    /* width: 40%; */
+}
+
+.sub-button {
+    width: 200px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.acc-btn {
+    width: 200px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+}
+
+.btn-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 5px;
+    /* justify-content: center; */
+    flex-direction: column;
+}
+
+@media only screen and (max-width: 1200px) {
+    .auth-container {
+        width: 100%;
+    }
+}
