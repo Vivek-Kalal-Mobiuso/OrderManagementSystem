@@ -13,5 +13,9 @@ route.patch("/:id", verifyToken, orderController.updateOrderController);
 route.get("/:id", verifyToken, orderController.getOrderByIdController);
 // delete
 route.delete("/:id", verifyToken, orderController.deleteOrderByIdController);
+// payment
+route.post("/payment",orderController.paymentController);
+
+route.post("/payments",orderController.paymentController2);
 // 10127
 export default route;

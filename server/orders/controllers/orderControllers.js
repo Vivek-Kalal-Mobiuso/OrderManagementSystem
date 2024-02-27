@@ -1,4 +1,8 @@
 import * as orderService from '../service/orderServices.js'
+import stripe from "stripe";
+
+const secretKey = process.env.SECRET_KEY;
+const stripeInstance = stripe(secretKey);
 
 export const placeOrder = async (req, res) => {
     try {
@@ -51,6 +55,62 @@ export const deleteOrderByIdController = async (req, res) => {
         const deletedOrder = await orderService.deleteOrderByIdService(orderId)
 
         return res.status(200).send({ message: deletedOrder.message })
+    } catch (error) {
+        res.status(error.status || 500).send({ message: error.message || "Internal Server Error" })
+    }
+}
+export const paymentController = async (req, res) => {
+    try {
+        const cartItems = req.body
+
+        const session = await stripeInstance.checkout.sessions.create({
+            payment_method_types : ['card'],
+            mode : "payment",
+            line_items : cartItems.map((product) => {
+                return {
+                    price_data : {
+                        currency : 'inr',
+                        product_data : {
+                            name : product.productDesc
+                        },
+                        unit_amount : product.productPrice * 1000
+                    },
+                    quantity : 1
+                }
+            }),
+            success_url : "http://localhost:3000/sucess",
+            cancel_url : "http://localhost:3000/cancel",
+        })
+        console.log("hi");
+        return res.status(200).send({ url: session.url })
+    } catch (error) {
+        res.status(error.status || 500).send({ message: error.message || "Internal Server Error" })
+    }
+}
+export const paymentController2 = async (req, res) => {
+    try {
+        const cartItems = req.body
+
+        const session = await stripeInstance.checkout.sessions.create({
+            payment_method_types : ['card'],
+            mode : "payment",
+            line_items : cartItems.map((product) => {
+                return {
+                    price_data : {
+                        currency : 'inr',
+                        product_data : {
+                            name : product.productDesc
+                        },
+                        unit_amount : Math.round(product.productPrice * 100)
+                    },
+                    quantity : 1
+                }
+            }),
+            success_url : "http://localhost:3000/sucess",
+            cancel_url : "http://localhost:3000/cancel",
+        })
+        console.log("hi");
+        return res.status(200).send({ id: session.id })
     } catch (error) {
         res.status(error.status || 500).send({ message: error.message || "Internal Server Error" })
     }

@@ -1,12 +1,16 @@
 import dotenv from 'dotenv'
+dotenv.config();
 import express from "express";
 import customerRoutes from './routes/customerRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import productRoutes from './routes/productsRoutes.js'
 import connection from "./database/databaseConfig.js";
 import cors from "cors"
+import stripe from "stripe";
 
-dotenv.config();
+const secretKey = process.env.SECRET_KEY;
+const stripeInstance = stripe(secretKey);
+
 const app = express();
 const PORT = 3001
 

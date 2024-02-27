@@ -1,22 +1,62 @@
 import React, { useEffect, useState } from 'react'
 import Container from "react-bootstrap/Container"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import CartItem from '../components/CartItem'
 import Button from 'react-bootstrap/esm/Button'
 import { useNavigate } from "react-router-dom"
 import Lottie from 'lottie-react'
 import shopping from "../animations/Shopping.json"
 import { toast } from 'react-toastify';
+import { checkout, checkoutPay } from '../api/customersApis'
+import { loadStripe } from '@stripe/stripe-js';
+import { removeCartItems } from '../store/slice/UserSlice'
 
 const MyCart = () => {
   const { cart, token } = useSelector((state) => state.users)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
 
   }, [cart])
 
+  // Functions
+  const handleCheckout = async () => {
+    if (!token) {
+      toast.error("Please login First")
+      navigate("/auth")
+    }
+    // (!token) ? navigate("/auth") : navigate("/checkout")
+    const { url } = await checkout(cart);
+
+    window.location = url;
+  }
+
+  const makePayment = async () => {
+
+    if (!token) {
+      toast.error("Please login First")
+      navigate("/auth")
+    } else {
+      const stripe = await loadStripe('pk_test_51Oo3dGSAnATcUATRMBkPrMAe5YKersrDq1JyxYqLdaLLJPfpWR7jBVke3qNvEhpbjQxJ72bhOZfKGtUtvoRageX300zBcEvgTC');
+
+      const session = await checkoutPay(cart);
+
+      const result = stripe.redirectToCheckout({
+        sessionId: session.id
+      })
+
+      if (result.error) {
+        console.log(result.error);
+      }
+    }
+
+  }
+
+  const handleRemove = () => {
+    dispatch(removeCartItems())
+  }
 
   if (cart.length === 0) {
     return (
@@ -33,6 +73,12 @@ const MyCart = () => {
   return (
     // Check
     <Container className='p-4'>
+      <div className='d-flex justify-content-end'>
+        <Button
+          variant='danger'
+          onClick={handleRemove}
+        >Remove all</Button>
+      </div>
       <div className='border border-2 border-opacity-50 d-grid gap-2 border-dark mt-3 p-2 rounded'>
         {cart.map((item, i) => (
           <CartItem item={item} key={i} setTotal={setTotal} />
@@ -43,12 +89,8 @@ const MyCart = () => {
       </div> */}
       <div className='text-end d-flex justify-content-between p-2 mt-2 border border-2'>
         <h1>Your Grand Total is : {total}</h1>
-        <Button variant='success' onClick={() => {
-          if(!token) {
-            toast.error("Please login First")
-          }
-          (!token) ? navigate("/auth") : navigate("/checkout")
-        }}>Checkout</Button>
+        {/* <Button variant='success' onClick={handleCheckout}>Checkout</Button> */}
+        <Button variant='success' onClick={makePayment}>Checkout</Button>
       </div>
     </Container>
   )
