@@ -64,24 +64,24 @@ export const paymentController = async (req, res) => {
         const cartItems = req.body
 
         const session = await stripeInstance.checkout.sessions.create({
-            payment_method_types : ['card'],
-            mode : "payment",
-            line_items : cartItems.map((product) => {
+            payment_method_types: ['card'],
+            mode: "payment",
+            line_items: cartItems.map((product) => {
                 return {
-                    price_data : {
-                        currency : 'inr',
-                        product_data : {
-                            name : product.productDesc
+                    price_data: {
+                        currency: 'inr',
+                        product_data: {
+                            name: product.productDesc
                         },
-                        unit_amount : product.productPrice * 1000
+                        unit_amount: product.productPrice * 1000
                     },
-                    quantity : 1
+                    quantity: 1
                 }
             }),
-            success_url : "http://localhost:3000/sucess",
-            cancel_url : "http://localhost:3000/cancel",
+            success_url: "http://localhost:3000/sucess",
+            cancel_url: "http://localhost:3000/cancel",
         })
-        console.log("hi");
+        res.redirect(303, session.url);
         return res.status(200).send({ url: session.url })
     } catch (error) {
         res.status(error.status || 500).send({ message: error.message || "Internal Server Error" })
@@ -92,22 +92,22 @@ export const paymentController2 = async (req, res) => {
         const cartItems = req.body
 
         const session = await stripeInstance.checkout.sessions.create({
-            payment_method_types : ['card'],
-            mode : "payment",
-            line_items : cartItems.map((product) => {
+            payment_method_types: ['card'],
+            mode: "payment",
+            line_items: cartItems.map((product) => {
                 return {
-                    price_data : {
-                        currency : 'inr',
-                        product_data : {
-                            name : product.productDesc
+                    price_data: {
+                        currency: 'inr',
+                        product_data: {
+                            name: product.productDesc
                         },
-                        unit_amount : Math.round(product.productPrice * 100)
+                        unit_amount: Math.round(product.productPrice * 100)
                     },
-                    quantity : 1
+                    quantity: 1
                 }
             }),
-            success_url : "http://localhost:3000/sucess",
-            cancel_url : "http://localhost:3000/cancel",
+            success_url: "http://localhost:3000/sucess",
+            cancel_url: "http://localhost:3000/cancel",
         })
         console.log("hi");
         return res.status(200).send({ id: session.id })
