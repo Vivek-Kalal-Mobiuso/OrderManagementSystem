@@ -53,9 +53,12 @@ const userSlice = createSlice({
                 )
             }
         },
+        removeCartItems(state, action) {
+            state.cart = []
+        }
     }
 })
 
 export default userSlice.reducer
 
-export const { setUser, logoutUser, usersCart, removeFromCart, setAllProducts, filteredProduct } = userSlice.actions
+export const { setUser, logoutUser, usersCart, removeFromCart, setAllProducts, filteredProduct, removeCartItems } = userSlice.actions

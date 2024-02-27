@@ -38,3 +38,43 @@ export async function loginCustomer(customerDetails) {
         }, 2000)
     })
 }
+
+export async function checkout(cart) {
+    return new Promise(async (resolve, reject) => {
+        console.log(cart);
+        const config = {
+            headers: {
+                'Content-Type': 'application/json', // Set Content-Type header to application/json
+                // Add more headers as needed
+            },
+        }
+        try {
+            const data = await axios.post("/api/v1/orders/payment", cart, config);
+            console.log(data);
+            console.log(data.data.url);
+            resolve({ url: data.data.url })
+        } catch (error) {
+            reject(error.message)
+        }
+    })
+}
+
+export async function checkoutPay(cart) {
+    return new Promise(async (resolve, reject) => {
+        console.log(cart);
+        const config = {
+            headers: {
+                'Content-Type': 'application/json', // Set Content-Type header to application/json
+                // Add more headers as needed
+            },
+        }
+        try {
+            const data = await axios.post("/api/v1/orders/payments", cart, config);
+            console.log(data);
+            resolve(data.data)
+        } catch (error) {
+            reject(error.message)
+        }
+    })
+}
+
