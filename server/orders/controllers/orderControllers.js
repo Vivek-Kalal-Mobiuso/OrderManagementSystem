@@ -17,7 +17,7 @@ export const placeOrder = async (req, res) => {
         // SRP : Single responsibility principle
         res.status(200).send({ message: "Order Succesfully Placed..", orderId: placedOrderDetails.result.insertId })
     } catch (error) {
-        res.status(error.status || 500).send({ message: "Error in updating order" })
+        res.status(error.status || 500).send({ message: error.message || "Error in updating order" })
     }
 }
 
@@ -63,6 +63,7 @@ export const paymentController = async (req, res) => {
     try {
         const cartItems = req.body
 
+
         const session = await stripeInstance.checkout.sessions.create({
             payment_method_types: ['card'],
             mode: "payment",
@@ -78,9 +79,12 @@ export const paymentController = async (req, res) => {
                     quantity: 1
                 }
             }),
-            success_url: "http://localhost:3000/sucess",
+            // success_url: "http://localhost:3000/sucess",
             cancel_url: "http://localhost:3000/cancel",
         })
+
+
+
         res.redirect(303, session.url);
         return res.status(200).send({ url: session.url })
     } catch (error) {
@@ -109,7 +113,6 @@ export const paymentController2 = async (req, res) => {
             success_url: "http://localhost:3000/sucess",
             cancel_url: "http://localhost:3000/cancel",
         })
-        console.log("hi");
         return res.status(200).send({ id: session.id })
     } catch (error) {
         res.status(error.status || 500).send({ message: error.message || "Internal Server Error" })

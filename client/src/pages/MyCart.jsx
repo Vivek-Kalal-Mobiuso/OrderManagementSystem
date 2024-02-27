@@ -12,7 +12,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { removeCartItems } from '../store/slice/UserSlice'
 
 const MyCart = () => {
-  const { cart, token } = useSelector((state) => state.users)
+  const { cart, token ,user} = useSelector((state) => state.users)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [total, setTotal] = useState(0);
@@ -39,9 +39,10 @@ const MyCart = () => {
       toast.error("Please login First")
       navigate("/auth")
     } else {
+
       const stripe = await loadStripe('pk_test_51Oo3dGSAnATcUATRMBkPrMAe5YKersrDq1JyxYqLdaLLJPfpWR7jBVke3qNvEhpbjQxJ72bhOZfKGtUtvoRageX300zBcEvgTC');
 
-      const session = await checkoutPay(cart);
+      const { session } = await checkoutPay(cart,user,token);
 
       const result = stripe.redirectToCheckout({
         sessionId: session.id
@@ -50,6 +51,17 @@ const MyCart = () => {
       if (result.error) {
         console.log(result.error);
       }
+
+      // (async () => {
+      //   const { paymentIntent, error } = await stripe.confirmCardPayment('pk_test_51Oo3dGSAnATcUATRMBkPrMAe5YKersrDq1JyxYqLdaLLJPfpWR7jBVke3qNvEhpbjQxJ72bhOZfKGtUtvoRageX300zBcEvgTC');
+      //   if (error) {
+      //     // Handle error here
+      //     console.log(error);
+      //   } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+      //     // Handle successful payment here
+      //     console.log("Success");
+      //   }
+      // })();
     }
 
   }
@@ -87,10 +99,10 @@ const MyCart = () => {
       {/* <div className='border border-2 border-opacity-50 p-2 mt-2'>
           <h2>Your Grand Total is : {total}</h2>
       </div> */}
-      <div className='text-end d-flex justify-content-between p-2 mt-2 border border-2'>
+      <div className='text-end d-flex justify-content-between align-items-center p-2 mt-2 border border-2'>
         <h1>Your Grand Total is : {total}</h1>
         {/* <Button variant='success' onClick={handleCheckout}>Checkout</Button> */}
-        <Button variant='success' onClick={makePayment}>Checkout</Button>
+        <Button variant='success' onClick={makePayment} style={{ width: "200px", height: "50px" }}>Checkout</Button>
       </div>
     </Container>
   )

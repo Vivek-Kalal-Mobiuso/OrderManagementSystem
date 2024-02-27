@@ -32,7 +32,7 @@ export const orderHeaderService = (orderDetails) => {
 
             })
         } catch (error) {
-            reject({ message: error.message, status: 500 })
+            reject({ message: error.message , status: 500 })
         }
     })
 }
@@ -41,14 +41,16 @@ export const orderItemsService = (orderDetails, orderId) => {
 
     return new Promise((resolve, reject) => {
         try {
-            const products = orderDetails.products;
-
+            const products = orderDetails.products; 
+            console.log(orderId);
+            console.log(orderDetails);
             products.map((product, index) => {
-                const orderItemsQuery = `INSERT INTO ORDER_ITEMS VALUES(${orderId} , ${product.productId} ,${product.productQuantity} )`;
-
+                // const orderItemsQuery = `INSERT INTO ORDER_ITEMS VALUES(${orderId} , ${product.productId} ,${product.productQuantity} )`;
+                const orderItemsQuery = `INSERT INTO ORDER_ITEMS VALUES(${orderId} , ${product.productId} ,1)`;
+                // console.log(orderItemsQuery);
                 connection.query(orderItemsQuery, (err, result) => {
                     if (err) {
-                        return reject({ message: "Query Error Execution", status: 501 })
+                        return reject({ message: err.message || "Query Error Execution", status: 501 })
                     }
                     console.log(result);
                     resolve({ message: "Order Placed Succesfully :)", result: result, status: 200 })

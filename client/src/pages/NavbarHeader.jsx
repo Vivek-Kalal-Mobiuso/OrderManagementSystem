@@ -51,7 +51,7 @@ function NavbarHeader() {
             }}
               variant={`${(user) ? "danger" : "success"}`}
               className='text-center'
-            >{user ? "Logout" : "Login/Signup"} <img src={logout} alt='logout' className='logout-img' /></Button>
+            >{user ? "Logout" : "Login/Signup"}</Button>
           </div>
         </Navbar.Collapse>
       </Container>

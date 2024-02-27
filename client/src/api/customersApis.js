@@ -59,19 +59,34 @@ export async function checkout(cart) {
     })
 }
 
-export async function checkoutPay(cart) {
+export async function checkoutPay(cart,user,token) {
     return new Promise(async (resolve, reject) => {
-        console.log(cart);
+        const orderData = {
+            customerId : user.customerId,
+            paymentMode : "CARD",
+            products : cart
+        }
+
         const config = {
             headers: {
                 'Content-Type': 'application/json', // Set Content-Type header to application/json
                 // Add more headers as needed
             },
         }
+        const orderConfig = {
+            headers: {
+                'Content-Type': 'application/json', // Set Content-Type header to application/json
+                'Authorization': 'Bearer ' + token, // Set Content-Type header to application/json
+                // Add more headers as needed
+            },
+        }
         try {
+            const response = await axios.post("/api/v1/orders", orderData, orderConfig);
+
             const data = await axios.post("/api/v1/orders/payments", cart, config);
-            console.log(data);
-            resolve(data.data)
+
+            console.log(response);
+            resolve({ session: data.data })
         } catch (error) {
             reject(error.message)
         }
