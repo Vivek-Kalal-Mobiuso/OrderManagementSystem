@@ -4,3 +4,27 @@
     align-items: center;
     width: 100%;
 }
+
+.category-chips-container{
+    display: flex;
+    width: 100%;
+    border-bottom: 2px solid rgba(0, 0,0, 0.5);
+    margin-bottom: 10px;
+    /* border border-bottom-2 border-opacity-50 border-black */
+}
+
+.cat-line{
+    height: 25px;
+    width: 15px;
+    border: 2px solid #DB4444;
+    background-color: #DB4444;
+    border-radius: 2px;
+}
+
+.category-text{
+    font-size: 14px;
+    font-weight: 400;
+    color: #DB4444;
+    margin-left: 2px;
+    letter-spacing: 1px;
+}

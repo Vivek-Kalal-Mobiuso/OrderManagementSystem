@@ -4,8 +4,20 @@ import { getAllProducts, getAllCategories } from "../api/ordersApi"
 import Lottie from "lottie-react";
 import loading from "../animations/loading.json"
 import "../css/homepage.css"
+import "../css/categorychip.css"
 import { useDispatch, useSelector } from "react-redux";
 import { filteredProduct, setAllProducts } from "../store/slice/UserSlice";
+import {
+  books,
+  clothes,
+  computer,
+  electronics,
+  mobiles,
+  stationary,
+  toys,
+  watches,
+  bags,
+} from "../assets/CategoryChips"
 
 const HomePage = () => {
 
@@ -14,7 +26,7 @@ const HomePage = () => {
   const [categoriesList, setCategoriesList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("select");
   const dispatch = useDispatch();
-  const { filteredProducts , allProducts } = useSelector((state) => state.users);
+  const { filteredProducts } = useSelector((state) => state.users);
 
   // Functions
   const loadProucts = async () => {
@@ -49,7 +61,7 @@ const HomePage = () => {
 
   return (
     <div className='container mt-4'>
-      <div className="col-md-4 col-sm-4 col-xs-3 mb-3">
+      {/* <div className="col-md-4 col-sm-4 col-xs-3 mb-3">
 
         <select name="filter" onChange={handleCategoryChange}>
           <option value="select">select</option>
@@ -58,7 +70,90 @@ const HomePage = () => {
           ))}
         </select>
 
+      </div> */}
+      <div className="d-flex flex-column ">
+        <div className="d-flex ">
+          <div className="cat-line" />
+          <p className="category-text mt-2">categories</p>
+        </div>
+        <h3 style={{fontFamily : "sans-serif"}}>Browse By Category :-</h3>
       </div>
+      <div className="category-chips-container d-flex flex-wrap gap-4 justify-content-lg-around p-2 pb-3 mb-3">
+        <div
+          className='category-chip'
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          title="Electronics"
+        >
+          <img src={electronics} alt="Electronics" className="category-chip" />
+        </div>
+        <div
+          className='category-chip'
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Books"
+        >
+          <img src={books} alt="Books" className="category-chip" />
+        </div>
+        <div
+          className='category-chip'
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Mobiles"
+        >
+          <img src={mobiles} alt="Mobiles" className="category-chip" />
+        </div>
+        <div
+          className='category-chip'
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Clothes"
+        >
+          <img src={clothes} alt="Clothes" className="category-chip" />
+        </div>
+        <div
+          className='category-chip'
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Computer"
+        >
+          <img src={computer} alt="Computer" className="category-chip" />
+        </div>
+        <div
+          className='category-chip'
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Stationary"
+        >
+          <img src={stationary} alt="Stationary" className="category-chip" />
+        </div>
+        <div
+          className='category-chip'
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Toys"
+        >
+          <img src={toys} alt="Toys" className="category-chip" />
+        </div>
+        <div
+          className='category-chip'
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Watches"
+        >
+          <img src={watches} alt="Watches" className="category-chip" />
+        </div>
+        <div
+          className='category-chip'
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Bags"
+        >
+          <img src={bags} alt="Bags" className="category-chip" />
+        </div>
+      </div>
+
+
       {products.length !== 0 ?
         <div className="container col-12 d-flex justify-content-center gap-3 p-2 border border-2 flex-wrap ">
           {
