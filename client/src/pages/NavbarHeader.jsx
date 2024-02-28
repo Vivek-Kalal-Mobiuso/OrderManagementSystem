@@ -43,7 +43,6 @@ function NavbarHeader() {
           <div className='text-center mt-sm-4 mt-lg-0 mt-4 mr-4'>
             <Button onClick={() => {
               if (user) {
-                console.log("hi")
                 dispatch(logoutUser());
                 toast.success("Logged out Successfully")
               } else {

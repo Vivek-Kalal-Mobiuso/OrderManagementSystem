@@ -82,7 +82,7 @@ const HomePage = () => {
       </div>
       <div className="category-chips-container d-flex flex-wrap gap-4 justify-content-lg-around p-2 pb-3 mb-3">
         <div
-          className='category-chip d-flex justify-content-center align-items-center '
+          className='category-chip d-flex justify-content-center align-items-center'
           data-bs-toggle="tooltip"
           data-bs-placement="bottom"
           title="All"
