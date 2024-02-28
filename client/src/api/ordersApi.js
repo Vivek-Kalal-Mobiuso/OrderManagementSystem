@@ -19,6 +19,7 @@ export async function getAllCategories() {
     return new Promise(async (resolve, reject) => {
         try {
             const { data: { categories } } = await axios.get("/api/v1/products/categories");
+            console.log(categories);
             resolve(categories)
 
         } catch (error) {

@@ -18,6 +18,7 @@ import {
   watches,
   bags,
 } from "../assets/CategoryChips"
+import { motion } from "framer-motion"
 
 const HomePage = () => {
 
@@ -45,7 +46,8 @@ const HomePage = () => {
   }
 
   const handleCategoryChange = (e) => {
-    const cat = e.target.value;
+    console.log(e.target.id);
+    const cat = e.target.id;
     setSelectedCategory(cat)
     dispatch(filteredProduct(cat))
   }
@@ -76,92 +78,119 @@ const HomePage = () => {
           <div className="cat-line" />
           <p className="category-text mt-2">categories</p>
         </div>
-        <h3 style={{fontFamily : "sans-serif"}}>Browse By Category :-</h3>
+        <h3 style={{ fontFamily: "sans-serif" }}>Browse By Category :-</h3>
       </div>
       <div className="category-chips-container d-flex flex-wrap gap-4 justify-content-lg-around p-2 pb-3 mb-3">
+        <div
+          className='category-chip d-flex justify-content-center align-items-center '
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          title="All"
+          onClick={handleCategoryChange}
+        >
+          <p className="w-100" id="select">All</p>
+        </div>
         <div
           className='category-chip'
           data-bs-toggle="tooltip"
           data-bs-placement="bottom"
           title="Electronics"
+          onClick={handleCategoryChange}
         >
-          <img src={electronics} alt="Electronics" className="category-chip" />
+          <img src={electronics} alt="Electronics" id="2050" className="category-chip" />
         </div>
         <div
           className='category-chip'
           data-toggle="tooltip"
           data-placement="bottom"
           title="Books"
+          onClick={handleCategoryChange}
         >
-          <img src={books} alt="Books" className="category-chip" />
+          <img src={books} alt="Books" id="2054" className="category-chip" />
         </div>
         <div
           className='category-chip'
           data-toggle="tooltip"
           data-placement="bottom"
           title="Mobiles"
+          onClick={handleCategoryChange}
         >
-          <img src={mobiles} alt="Mobiles" className="category-chip" />
+          <img src={mobiles} alt="Mobiles" id="2055" className="category-chip" />
         </div>
         <div
           className='category-chip'
           data-toggle="tooltip"
           data-placement="bottom"
           title="Clothes"
+          onClick={handleCategoryChange}
         >
-          <img src={clothes} alt="Clothes" className="category-chip" />
+          <img src={clothes} alt="Clothes" id="2052" className="category-chip" />
         </div>
         <div
           className='category-chip'
           data-toggle="tooltip"
           data-placement="bottom"
           title="Computer"
+          onClick={handleCategoryChange}
         >
-          <img src={computer} alt="Computer" className="category-chip" />
+          <img src={computer} alt="Computer" id="2053" className="category-chip" />
         </div>
         <div
           className='category-chip'
           data-toggle="tooltip"
           data-placement="bottom"
           title="Stationary"
+          onClick={handleCategoryChange}
         >
-          <img src={stationary} alt="Stationary" className="category-chip" />
+          <img src={stationary} alt="Stationary" id="2056" className="category-chip" />
         </div>
         <div
           className='category-chip'
           data-toggle="tooltip"
           data-placement="bottom"
           title="Toys"
+          onClick={handleCategoryChange}
         >
-          <img src={toys} alt="Toys" className="category-chip" />
+          <img src={toys} alt="Toys" id="2051" className="category-chip" />
         </div>
         <div
           className='category-chip'
           data-toggle="tooltip"
           data-placement="bottom"
           title="Watches"
+          onClick={handleCategoryChange}
         >
-          <img src={watches} alt="Watches" className="category-chip" />
+          <img src={watches} alt="Watches" id="2057" className="category-chip" />
         </div>
         <div
           className='category-chip'
           data-toggle="tooltip"
           data-placement="bottom"
           title="Bags"
+          onClick={handleCategoryChange}
         >
-          <img src={bags} alt="Bags" className="category-chip" />
+          <img src={bags} alt="Bags" id="2059" className="category-chip" />
         </div>
       </div>
 
 
       {products.length !== 0 ?
-        <div className="container col-12 d-flex justify-content-center gap-3 p-2 border border-2 flex-wrap ">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          className="container col-12 d-flex justify-content-center gap-3 p-2 border border-2 flex-wrap "
+          transition={{ duration: 0.5 }}
+          variants={{
+            hidden: { opacity: 0, y: 50 },
+            visible: { opacity: 1, y: 0 }
+          }}
+        >
           {
             products.map((product, i) => (
               <Card product={product} key={i} />
             ))
           }
-        </div>
+        </motion.div>
         :
         <div className="animation d-flex flex-column">
           <Lottie animationData={loading} loop={true} />

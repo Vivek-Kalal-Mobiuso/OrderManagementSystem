@@ -23,7 +23,7 @@ function NavbarHeader() {
 
 
   return (
-    <Navbar expand="lg" className="bg-light">
+    <Navbar expand="lg" className="bg-light border border-2 border-opacity-50 sticky">
       <Container className='d-flex justify-content-around'>
         <Navbar.Brand className='logo'><span>OMS</span></Navbar.Brand>
         <Navbar.Toggle aria-controls="nav-bg" className='bg-white' />
