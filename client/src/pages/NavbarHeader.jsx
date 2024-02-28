@@ -24,19 +24,19 @@ function NavbarHeader() {
 
   return (
     <Navbar expand="lg" className="bg-light">
-      <Container>
+      <Container className='d-flex justify-content-around'>
         <Navbar.Brand className='logo'><span>OMS</span></Navbar.Brand>
         <Navbar.Toggle aria-controls="nav-bg" className='bg-white' />
-        <Navbar.Collapse id="basic-navbar-nav" className='d-flex justify-content-between align-items-center'>
+        <Navbar.Collapse id="basic-navbar-nav" className=''>
           <Nav className="me-auto nav-new">
             <Link className={`nav-links ${url === '/' ? "active" : ""} nav-link-ltr`} to="/">Home</Link>
+            <Link className={`nav-links ${url === '/' ? "active" : ""} nav-link-ltr`} to="/account">Account</Link>
             <div className='cart-div'>
               <Link className={`nav-links ${url === '/mycart' ? "active" : ""} nav-link-ltr`} to="/mycart">
                 My Cart
-                <img src={cartImg} alt='cart' style={{ width: "20px" }} />
+                <img src={cartImg} alt='cart' style={{ width: "20px" }} className='cart-img' />
+                <span style={{ color: "white" }} className='bg-primary rounded-5 px-1 cart-count'>{cart.length}</span>
               </Link>
-              <span style={{ color: "white" }} className='bg-primary rounded-5 px-1'>{cart.length}</span>
-
             </div>
           </Nav>
 

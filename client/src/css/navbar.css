@@ -1,86 +1,97 @@
 .nav-custom {
-    padding: 10px;
-    gap: 2em;
+  padding: 10px;
+  gap: 2em;
 }
 
-  
+
 .logo {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .nav-links {
-    font-weight: bold;
-    font-size: 14px;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #031D44;
-    padding: 20px 0px;
-    margin: 0px 20px;
-    display: inline-block;
-    position: relative;
-    opacity: 0.75;
-  }
-  
-  .nav-links:hover {
-    opacity: 1;
-  }
-  
-  .nav-links::before {
-    transition: 300ms;
-    height: 5px;
-    content: "";
-    position: absolute;
-    background-color: #031D44;
-  }
-  
-  .nav-link-ltr::before {
-    width: 0%;
-    bottom: 10px;
-  }
-  
-  .nav-link-ltr:hover::before {
-    width: 100%;
-  }
-  
+  /* font-weight: bold; */
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #031D44;
+  padding: 20px 0px;
+  margin: 0px 20px;
+  display: inline-block;
+  position: relative;
+  opacity: 0.75;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.nav-links:hover {
+  opacity: 1;
+}
+
+.nav-links::before {
+  transition: 300ms;
+  height: 5px;
+  content: "";
+  position: absolute;
+  background-color: #031D44;
+}
+
+.nav-link-ltr::before {
+  width: 0%;
+  bottom: 10px;
+}
+
+.nav-link-ltr:hover::before {
+  width: 100%;
+}
+
 
 .logo span {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(250, 135, 0, 1) 46%, rgb(220, 220, 220) 79%);
-    -webkit-background-clip: text;
-    color: transparent;
-    /* Hide the original text */
-    display: inline-block;
-    font-weight: 700;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(250, 135, 0, 1) 46%, rgb(19, 19, 19) 79%);
+  -webkit-background-clip: text;
+  color: transparent;
+  /* Hide the original text */
+  display: inline-block;
+  font-weight: 700;
 }
 
 .active {
-    /* color: aliceblue; */
-    border-bottom-width: 2px;
-    transition: all;
-    transition-duration: 500ms;
-    border-bottom: black;
+  /* color: aliceblue; */
+  border-bottom-width: 2px;
+  transition: all;
+  transition-duration: 500ms;
+  border-bottom: black;
 }
 
 .cart-div {
-    /* position: relative; */
+  /* position: relative; */
 }
 
 .cart {
-    position: absolute;
+  position: absolute;
 }
 
 .nav-bg {
-    background: white;
+  background: white;
 }
 
 .nav-new {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    font-weight: 600;
-    font-size: large;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  font-weight: 600;
+  font-size: large;
 }
 
 .logout-img {
-    width: 30px;
+  width: 30px;
+}
+
+.cart-img {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
 }

@@ -1,31 +1,33 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { loadStripe } from '@stripe/stripe-js';
+import React from 'react'
+import Container from 'react-bootstrap/esm/Container'
+import successpayment from '../animations/PaymentSucessfull.json'
+import celebration from '../animations/Celebration.json'
+import "../css/sucess.css"
+import Button from 'react-bootstrap/esm/Button'
+import { useNavigate } from "react-router-dom"
+import Lottie from 'lottie-react'
 
 const Sucess = () => {
-  // States
-  const { user } = useSelector((state) => state.users);
-
-  useEffect(() => {
-    // console.log(user);
-    // (async () => {
-    // const stripe = await loadStripe('pk_test_51Oo3dGSAnATcUATRMBkPrMAe5YKersrDq1JyxYqLdaLLJPfpWR7jBVke3qNvEhpbjQxJ72bhOZfKGtUtvoRageX300zBcEvgTC');
-
-    //   const { paymentIntent, error } = await stripe.confirmCardPayment('pk_test_51Oo3dGSAnATcUATRMBkPrMAe5YKersrDq1JyxYqLdaLLJPfpWR7jBVke3qNvEhpbjQxJ72bhOZfKGtUtvoRageX300zBcEvgTC');
-    //   if (error) {
-    //     // Handle error here
-    //     console.log(error);
-    //   } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-    //     // Handle successful payment here
-    //     console.log("Success");
-    //   }
-    // })();
-  }, [])
-
-
+  const navigate = useNavigate()
 
   return (
-    <div>Sucess</div>
+    <Container className='d-flex justify-content-center align-items-center position-relative vh-100 '>
+      <Lottie animationData={celebration} className='position-absolute bottom-0 w-100' loop="false"  />
+      <div className='card p-2 sucess-card'>
+        <div className=''>
+          <header className=''>Payment Status</header>
+        </div>
+        <div className='success-ani'>
+          <Lottie animationData={successpayment} loop={true} />
+        </div>
+
+        <p className='text-center'>Payment is done <br /> Sucessfully</p>
+
+        <div className='text-center'>
+          <Button variant='primary' onClick={() => navigate("/")} style={{ width: "150px" }} >Go Back</Button>
+        </div>
+      </div>
+    </Container>
   )
 }
 
