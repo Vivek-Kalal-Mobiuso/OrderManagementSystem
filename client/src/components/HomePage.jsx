@@ -47,6 +47,7 @@ const HomePage = () => {
 
   const handleCategoryChange = (e) => {
     console.log(e.target.id);
+    setProducts([])
     const cat = e.target.id;
     setSelectedCategory(cat)
     dispatch(filteredProduct(cat))
@@ -179,9 +180,9 @@ const HomePage = () => {
           initial="hidden"
           whileInView="visible"
           className="container col-12 d-flex justify-content-center gap-3 p-2 border border-2 flex-wrap "
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
           variants={{
-            hidden: { opacity: 0, y: 50 },
+            hidden: { opacity: 0, y: 20 },
             visible: { opacity: 1, y: 0 }
           }}
         >
