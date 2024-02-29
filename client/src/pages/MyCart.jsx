@@ -12,7 +12,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { removeCartItems } from '../store/slice/UserSlice'
 
 const MyCart = () => {
-  const { cart, token ,user} = useSelector((state) => state.users)
+  const { cart, token, user } = useSelector((state) => state.users)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [total, setTotal] = useState(0);
@@ -42,7 +42,7 @@ const MyCart = () => {
 
       const stripe = await loadStripe('pk_test_51Oo3dGSAnATcUATRMBkPrMAe5YKersrDq1JyxYqLdaLLJPfpWR7jBVke3qNvEhpbjQxJ72bhOZfKGtUtvoRageX300zBcEvgTC');
 
-      const { session } = await checkoutPay(cart,user,token);
+      const { session } = await checkoutPay(cart, user, token);
 
       const result = stripe.redirectToCheckout({
         sessionId: session.id
@@ -102,7 +102,9 @@ const MyCart = () => {
       <div className='text-end d-flex justify-content-between align-items-center p-2 mt-2 border border-2'>
         <h1>Your Grand Total is : {total}</h1>
         {/* <Button variant='success' onClick={handleCheckout}>Checkout</Button> */}
-        <Button variant='success' onClick={makePayment} style={{ width: "200px", height: "50px" }}>Checkout</Button>
+        <Button variant='success'
+          // onClick={makePayment} 
+          style={{ width: "200px", height: "50px" }}>Checkout</Button>
       </div>
     </Container>
   )

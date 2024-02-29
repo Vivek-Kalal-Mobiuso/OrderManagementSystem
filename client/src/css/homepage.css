@@ -8,7 +8,7 @@
 .category-chips-container{
     display: flex;
     width: 100%;
-    border-bottom: 2px solid rgba(0, 0,0, 0.5);
+    border-bottom: 2px solid rgba(0, 0,0, 0.35);
     margin-bottom: 10px;
     /* border border-bottom-2 border-opacity-50 border-black */
 }

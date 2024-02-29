@@ -5,6 +5,7 @@
 
 
 .logo {
+  font-size: 2em;
   cursor: pointer;
 }
 
@@ -38,6 +39,9 @@
 .nav-link-ltr::before {
   width: 0%;
   bottom: 10px;
+}
+.nav-link-ltr::before.active {
+  width: 100%;
 }
 
 .nav-link-ltr:hover::before {

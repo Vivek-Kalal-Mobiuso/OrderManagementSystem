@@ -7,7 +7,8 @@ const userSlice = createSlice({
         token: null,
         cart: [],
         allProducts: [],
-        filteredProducts: []
+        filteredProducts: [],
+        wishlist: [],
     },
     reducers: {
         setUser(state, action) {
@@ -55,10 +56,22 @@ const userSlice = createSlice({
         },
         removeCartItems(state, action) {
             state.cart = []
-        }
+        },
+        addWishlist(state, action) {
+            const product = action.payload.product
+            state.wishlist = [...state.wishlist, product];
+        },
+        removeFromWishlist(state, action) {
+            const productId = action.payload
+
+            state.wishlist = state.wishlist.filter(
+                (product) => product.productId !== productId
+            );
+        },
     }
 })
 
 export default userSlice.reducer
 
-export const { setUser, logoutUser, usersCart, removeFromCart, setAllProducts, filteredProduct, removeCartItems } = userSlice.actions
+export const { setUser, logoutUser, usersCart, removeFromCart, setAllProducts, filteredProduct, removeCartItems,
+    addWishlist, removeFromWishlist } = userSlice.actions
