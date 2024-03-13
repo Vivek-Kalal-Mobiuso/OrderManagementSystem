@@ -5,9 +5,11 @@ import logout from "./logout.png"
 import cart from "./cart.png"
 import productImg from "./productImg.jpg"
 import sucess from "./sucess.png"
+import heart from "./heart.png"
 
 export {
     logo,
+    heart,
     sucess,
     productImg,
     cart,

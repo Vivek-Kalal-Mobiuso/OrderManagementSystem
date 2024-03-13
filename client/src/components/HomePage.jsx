@@ -19,6 +19,7 @@ import {
   bags,
 } from "../assets/CategoryChips"
 import { motion } from "framer-motion"
+import { toast } from "react-toastify";
 
 const HomePage = () => {
 

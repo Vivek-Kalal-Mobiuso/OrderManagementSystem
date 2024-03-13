@@ -6,6 +6,7 @@ import Heart from "react-animated-heart";
 import { useState } from 'react';
 import "../css/card.css"
 import { Rating } from 'react-simple-star-rating'
+import { toast } from 'react-toastify';
 
 function CardBox({ product }) {
   const dispatch = useDispatch();
@@ -17,8 +18,10 @@ function CardBox({ product }) {
   const handleWishlist = () => {
     // console.log(isClick);
     if (isClick) {
+      toast.success("Removed from Wishlist")
       dispatch(removeFromWishlist(product.productId))
     } else {
+      toast.success("Added to Wishlist")
       dispatch(addWishlist({ product }))
     }
     setClick(!isClick)
@@ -27,6 +30,7 @@ function CardBox({ product }) {
   const handleRating = (rate) => {
     setRating(rate)
     console.log(rate);
+
     // other logic
   }
   // Optinal callback functions

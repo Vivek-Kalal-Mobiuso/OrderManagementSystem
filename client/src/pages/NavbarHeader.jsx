@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from "../store/slice/UserSlice.js"
 import { toast } from 'react-toastify';
 import cartImg from '../assets/cart.png';
+import { heart } from '../assets/index.js';
 
 function NavbarHeader() {
   const location = useLocation(); // once ready it returns the 'window.location' object
@@ -30,7 +31,7 @@ function NavbarHeader() {
         <Navbar.Collapse id="basic-navbar-nav" className=''>
           <Nav className="me-auto nav-new">
             <Link className={`nav-links ${url === '/' ? "active" : ""} nav-link-ltr`} to="/">Home</Link>
-            <Link className={`nav-links ${url === '/' ? "active" : ""} nav-link-ltr`} to="/account">Account</Link>
+            <Link className={`nav-links ${url === '/account' ? "active" : ""} nav-link-ltr`} to="/account">Account</Link>
             <div className='cart-div'>
               <Link className={`nav-links ${url === '/mycart' ? "active" : ""} nav-link-ltr`} to="/mycart">
                 My Cart
@@ -39,7 +40,13 @@ function NavbarHeader() {
               </Link>
             </div>
           </Nav>
-
+          <div className='wishlist-container' onClick={() => navigate("/account/wishlist")}
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Wishlisht"
+          >
+            <img src={heart} alt="heart" className='heart-img' />
+          </div>
           <div className='text-center mt-sm-4 mt-lg-0 mt-4 mr-4'>
             <Button onClick={() => {
               if (user) {

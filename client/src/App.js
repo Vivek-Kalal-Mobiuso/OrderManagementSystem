@@ -1,9 +1,9 @@
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { HomePage } from './components'
+import { HomePage, Profile } from './components'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Authentication, Checkout, MyCart, NavbarHeader, Sucess, Cancel ,Account } from './pages';
+import { Authentication, Checkout, MyCart, NavbarHeader, Sucess, Cancel, Account, WishList } from './pages';
 import { Bounce, ToastContainer } from 'react-toastify';
 
 function App() {
@@ -34,7 +34,11 @@ function App() {
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/sucess' element={<Sucess />} />
           <Route path='/cancel' element={<Cancel />} />
-          <Route path='/account' element={<Account />} />
+          <Route path='account' element={<Account />} >
+            <Route path='' element={<Profile />} />
+            <Route path='wishlist' element={<WishList />} />
+            <Route path='tp' element={<WishList />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>

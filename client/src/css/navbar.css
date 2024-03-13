@@ -99,3 +99,16 @@
 .cart-count {
   position: absolute;
 }
+
+.heart-img{
+  width: 30px;
+  margin-right: 15px;
+}
+
+.wishlist-container{
+  cursor: pointer;
+}
+.wishlist-container:hover{
+  scale: 1.1;
+  transition-duration: 500ms;
+}

@@ -5,9 +5,11 @@ import NavbarHeader from "./NavbarHeader";
 import Sucess from "./Sucess";
 import Cancel from "./Cancel";
 import Account from "./Account.jsx";
+import WishList from "./WishList.jsx";
 
 export {
     Sucess,
+    WishList,
     Account,
     Cancel,
     NavbarHeader,
