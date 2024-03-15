@@ -38,6 +38,26 @@ export async function loginCustomer(customerDetails) {
         }, 2000)
     })
 }
+export async function updateCustomer(customerDetails, token) {
+    return new Promise(async (resolve, reject) => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json', // Set Content-Type header to application/json
+                'Authorization': 'Bearer ' + token,
+            },
+        }
+        console.log(customerDetails);
+        setTimeout(async () => {
+            try {
+                const { data: { updatedCustomer } } = await axios.put(`/api/v1/customers/${customerDetails.customerId}`, customerDetails, config);
+                console.log(updatedCustomer.updatedCustomer.result);
+                resolve(updatedCustomer.updatedCustomer.result)
+            } catch (error) {
+                reject(error.message)
+            }
+        }, 2000)
+    })
+}
 
 export async function checkout(cart) {
     return new Promise(async (resolve, reject) => {
@@ -59,12 +79,12 @@ export async function checkout(cart) {
     })
 }
 
-export async function checkoutPay(cart,user,token) {
+export async function checkoutPay(cart, user, token) {
     return new Promise(async (resolve, reject) => {
         const orderData = {
-            customerId : user.customerId,
-            paymentMode : "CARD",
-            products : cart
+            customerId: user.customerId,
+            paymentMode: "CARD",
+            products: cart
         }
 
         const config = {

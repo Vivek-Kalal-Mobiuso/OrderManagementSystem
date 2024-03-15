@@ -6,9 +6,11 @@ import Sucess from "./Sucess";
 import Cancel from "./Cancel";
 import Account from "./Account.jsx";
 import WishList from "./WishList.jsx";
+import MyOrders from "./MyOrders.jsx";
 
 export {
     Sucess,
+    MyOrders,
     WishList,
     Account,
     Cancel,

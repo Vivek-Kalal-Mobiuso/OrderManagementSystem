@@ -69,9 +69,10 @@ export const updateCustomerController = async (req, res) => {
         const customerDetails = req.body
 
         const updatedCustomer = await customerService.updateCustomerService(customerId, customerDetails)
-
-        return res.status(200).send({ message: updatedCustomer.message })
+        console.log(updatedCustomer);
+        return res.status(200).send({ updatedCustomer })
     } catch (error) {
+        console.log(error.message);
         res.status(error.status || 500).send({ message: error.message || "Internal Server Error" })
     }
 }

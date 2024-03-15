@@ -3,7 +3,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { HomePage, Profile } from './components'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Authentication, Checkout, MyCart, NavbarHeader, Sucess, Cancel, Account, WishList } from './pages';
+import {
+  Authentication,
+  Checkout,
+  MyCart,
+  NavbarHeader,
+  Sucess,
+  Cancel,
+  Account,
+  WishList,
+  MyOrders
+} from './pages';
 import { Bounce, ToastContainer } from 'react-toastify';
 
 function App() {
@@ -37,7 +47,7 @@ function App() {
           <Route path='account' element={<Account />} >
             <Route path='' element={<Profile />} />
             <Route path='wishlist' element={<WishList />} />
-            <Route path='tp' element={<WishList />} />
+            <Route path='myorders' element={<MyOrders />} />
           </Route>
         </Routes>
       </div>

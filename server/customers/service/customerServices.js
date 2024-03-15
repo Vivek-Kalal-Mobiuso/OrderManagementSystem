@@ -71,7 +71,7 @@ export const getAllOrdersService = (customerId) => {
                     // return res.status(501).send({ error: "Query Error", status: 501 });
                     return reject({ message: "Query Error", status: 501 })
                 }
-                if( result.length == 0 ) return reject({ message: "Customer Not Found", status: 400 })
+                if (result.length == 0) return reject({ message: "Customer Not Found", status: 400 })
 
                 let orders = []
                 if (result.length > 0) {
@@ -114,7 +114,7 @@ export const getCustomerByIdService = (customerId) => {
                 if (error) {
                     return reject({ message: "Query Error", status: 501 })
                 }
-                if( result.length == 0 ) return reject({ message: "Customer Not Found", status: 400 })
+                if (result.length == 0) return reject({ message: "Customer Not Found", status: 400 })
 
                 delete result[0].CUSTOMER_PASSWORD
                 delete result[0].ADDRESS_ID;
@@ -191,7 +191,7 @@ export const deleteCustomerByIdService = (customerId) => {
                 if (error) {
                     return reject({ message: "Query error...", status: 501 })
                 }
-                if( result.length == 0 ) return reject({ message: "Customer Not Found", status: 400 })
+                if (result.length == 0) return reject({ message: "Customer Not Found", status: 400 })
 
                 resolve({ message: "Customer Deleted Successfully", result })
             })
@@ -239,13 +239,16 @@ export const updateCustomerService = (customerId, customerDetails) => {
                 (oldCustomerDetails.customerEmail === customerDetails.customerEmail ? customerDetails.customerEmail : '')
             ]
 
-            connection.query(updateCustomerQuery, values, (error, result) => {
+            connection.query(updateCustomerQuery, values, async (error, result) => {
                 if (error) {
                     return reject({ message: "Query error... " + error.message, status: 501 })
                 }
-                if( result.length == 0 ) return reject({ message: "Customer Not Found", status: 400 })
+                if (result.length == 0) return reject({ message: "Customer Not Found", status: 400 })
 
-                resolve({ message: "Customer Updated Successfully", result })
+                // If Customer is Updated fetch the updated value and send it
+                const updatedCustomer = await getCustomerByIdService(customerId);
+
+                resolve({ message: "Customer Updated Successfully",  updatedCustomer })
             })
         } catch (error) {
             return reject({ message: "Internal Server Error... " + error.message })
@@ -264,7 +267,7 @@ export const loginCustomerService = (email, password) => {
                 if (error) {
                     return reject({ message: "Query error... ", status: 501 })
                 }
-                if( result.length == 0 ) return reject({ message: "Customer Not Found", status: 400 })
+                if (result.length == 0) return reject({ message: "Customer Not Found", status: 400 })
 
                 const user = result[0];
                 const isMatch = await bcrypt.compare(password, user.CUSTOMER_PASSWORD);
