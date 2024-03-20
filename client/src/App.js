@@ -36,7 +36,6 @@ function App() {
           theme="light"
           transition={Bounce}
         />
-
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/mycart' element={<MyCart />} />

@@ -58,6 +58,24 @@ export async function updateCustomer(customerDetails, token) {
         }, 2000)
     })
 }
+export async function getMyOrders(customerId, token) {
+    return new Promise(async (resolve, reject) => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json', // Set Content-Type header to application/json
+                'Authorization': 'Bearer ' + token,
+            },
+        }
+        setTimeout(async () => {
+            try {
+                const { data } = await axios.get(`/api/v1/customers/${customerId}/orders`, config);
+                resolve(data.orders)
+            } catch (error) {
+                reject(error.message)
+            }
+        }, 2000)
+    })
+}
 
 export async function checkout(cart) {
     return new Promise(async (resolve, reject) => {

@@ -19,8 +19,8 @@ const Account = () => {
         <Link to="/account/wishlist" className={`px-md-4 py-md-2 py-1 px-3 account-links ${(url === "/account/wishlist") ? "account-active" : ""}`}>
           Wishlist
         </Link>
-        <Link to="/account/myorders" className={`px-md-4 py-md-2 py-1 px-3 account-links ${(url === "/account/tp") ? "account-active" : ""}`}>
-          Profile
+        <Link to="/account/myorders" className={`px-md-4 py-md-2 py-1 px-3 account-links ${(url === "/account/myorders") ? "account-active" : ""}`}>
+          My Orders
         </Link>
       </div>
 

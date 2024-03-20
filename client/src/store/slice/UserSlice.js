@@ -9,6 +9,7 @@ const userSlice = createSlice({
         allProducts: [],
         filteredProducts: [],
         wishlist: [],
+        myOrders: [],
     },
     reducers: {
         setUser(state, action) {
@@ -19,6 +20,7 @@ const userSlice = createSlice({
         logoutUser(state, action) {
             state.user = null
             state.token = null
+            state.myOrders = []
         },
         usersCart(state, action) {
             const newProduct = action.payload.product;
@@ -69,10 +71,27 @@ const userSlice = createSlice({
                 (product) => product.productId !== productId
             );
         },
+        setOrders(state, action) {
+            // Get ProductId , OrderId ,Order Date ,orderStatus , paymentMode , productQty From Orders
+            const orders = action.payload
+            var newOrdersList = [];
+            orders.map((order) => (
+                newOrdersList.push({
+                    productName: state.allProducts.find(product => product.productId === order.productId).productDesc,
+                    productQauntity: order.productQuantity,
+                    orderId: order.orderId,
+                    orderDate: order.orderDate,
+                    orderStatus: order.orderStatus,
+                    paymentMode: order.paymentMode,
+                    deliveredTill: order.orderShipmentDate
+                })
+            ))
+            state.myOrders = newOrdersList
+        },
     }
 })
 
 export default userSlice.reducer
 
 export const { setUser, logoutUser, usersCart, removeFromCart, setAllProducts, filteredProduct, removeCartItems,
-    addWishlist, removeFromWishlist } = userSlice.actions
+    addWishlist, removeFromWishlist, setOrders } = userSlice.actions
