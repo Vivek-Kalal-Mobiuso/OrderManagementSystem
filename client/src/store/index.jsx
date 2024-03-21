@@ -2,7 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./slice/UserSlice";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
-import { createStore } from 'redux'
 import { combineReducers } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({

@@ -6,9 +6,8 @@ export const newCustomerController = async (req, res) => {
 
         const newCustomerDetails = await customerService.createNewCustomerService(customerDetails);
 
-        return res.status(200).send({ message: newCustomerDetails.message, customerId: newCustomerDetails.result.insertId });
+        return res.status(200).send({ message: newCustomerDetails.message, customer: newCustomerDetails.result, token: newCustomerDetails.token });
     } catch (error) {
-        // console.log( err);
         return res.status(error.status || 500).send({ error: error.message });
     }
 }
@@ -16,7 +15,7 @@ export const newCustomerController = async (req, res) => {
 export const getCustomerOrdersController = async (req, res) => {
     try {
         const customerId = req.params.customerId;
-        if( !customerId ) return res.status(400).send({message : "Please Provide CustomerID!"})
+        if (!customerId) return res.status(400).send({ message: "Please Provide CustomerID!" })
 
         const customerOrders = await customerService.getAllOrdersService(customerId);
 
@@ -29,7 +28,7 @@ export const getCustomerOrdersController = async (req, res) => {
 export const getCustomerByIdController = async (req, res) => {
     try {
         const customerId = req.params.customerId
-        if( !customerId ) return res.status(400).send({message : "Please Provide CustomerID!"})
+        if (!customerId) return res.status(400).send({ message: "Please Provide CustomerID!" })
 
         const customer = await customerService.getCustomerByIdService(customerId);
 
@@ -52,7 +51,7 @@ export const getAllCustomersController = async (req, res) => {
 export const deleteCustomerByIdController = async (req, res) => {
     try {
         const customerId = req.params.customerId
-        if( !customerId ) return res.status(400).send({message : "Please Provide CustomerID!"})
+        if (!customerId) return res.status(400).send({ message: "Please Provide CustomerID!" })
 
         const deletedCustomer = await customerService.deleteCustomerByIdService(customerId)
 
@@ -65,14 +64,12 @@ export const deleteCustomerByIdController = async (req, res) => {
 export const updateCustomerController = async (req, res) => {
     try {
         const customerId = req.params.customerId
-        if( !customerId ) return res.status(400).send({message : "Please Provide CustomerID!"})
+        if (!customerId) return res.status(400).send({ message: "Please Provide CustomerID!" })
         const customerDetails = req.body
 
         const updatedCustomer = await customerService.updateCustomerService(customerId, customerDetails)
-        console.log(updatedCustomer);
         return res.status(200).send({ updatedCustomer })
     } catch (error) {
-        console.log(error.message);
         res.status(error.status || 500).send({ message: error.message || "Internal Server Error" })
     }
 }

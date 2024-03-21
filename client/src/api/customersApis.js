@@ -3,17 +3,15 @@ import axios from "axios"
 axios.defaults.baseURL = "http://localhost:3001"
 
 export async function registerCustomer(customerDetails) {
-    console.log(customerDetails);
     return new Promise(async (resolve, reject) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json', // Set Content-Type header to application/json
-                // Add more headers as needed
             },
         }
         try {
-            const result = await axios.post("/api/v1/customers", customerDetails, config);
-            resolve(result)
+            const { data } = await axios.post("/api/v1/customers", customerDetails, config);
+            resolve(data)
         } catch (error) {
             reject(error.message)
         }
@@ -46,11 +44,9 @@ export async function updateCustomer(customerDetails, token) {
                 'Authorization': 'Bearer ' + token,
             },
         }
-        console.log(customerDetails);
         setTimeout(async () => {
             try {
                 const { data: { updatedCustomer } } = await axios.put(`/api/v1/customers/${customerDetails.customerId}`, customerDetails, config);
-                console.log(updatedCustomer.updatedCustomer.result);
                 resolve(updatedCustomer.updatedCustomer.result)
             } catch (error) {
                 reject(error.message)
@@ -79,7 +75,6 @@ export async function getMyOrders(customerId, token) {
 
 export async function checkout(cart) {
     return new Promise(async (resolve, reject) => {
-        console.log(cart);
         const config = {
             headers: {
                 'Content-Type': 'application/json', // Set Content-Type header to application/json
@@ -88,8 +83,6 @@ export async function checkout(cart) {
         }
         try {
             const data = await axios.post("/api/v1/orders/payment", cart, config);
-            console.log(data);
-            console.log(data.data.url);
             resolve({ url: data.data.url })
         } catch (error) {
             reject(error.message)

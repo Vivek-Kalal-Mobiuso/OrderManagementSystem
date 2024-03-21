@@ -34,9 +34,8 @@ function Authentication() {
                         }
                     );
 
-                    res.then((result) => {
-                        console.log(result);
-                        // dispatch(setUser())
+                    res.then((data) => {
+                        dispatch(setUser({ user: data.customer, token: data.token }))
                         navigate(-1)
                     }).catch((e) => {
                         navigate("/auth")
@@ -52,7 +51,6 @@ function Authentication() {
                         }
                     );
                     res.then((data) => {
-                        console.log("hi");
                         dispatch(setUser(data))
                         navigate(-1)
                     }).catch((e) => {
@@ -61,7 +59,6 @@ function Authentication() {
                 }
             } catch (error) {
                 toast.error("Something Went Wrong")
-                console.log(error);
             }
         },
     });
@@ -252,7 +249,7 @@ function Authentication() {
                             type='button'
                             className='acc-btn'
                             onClick={() => {
-                                
+
                                 setIsSignUp((prev) => !prev)
                             }}
                         > {!isSignup ? "Don't have Account ?" : "Already Have an Account"}

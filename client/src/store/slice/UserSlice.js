@@ -13,7 +13,6 @@ const userSlice = createSlice({
     },
     reducers: {
         setUser(state, action) {
-            console.log(action.payload);
             state.token = action.payload.token
             state.user = action.payload.user
         },
@@ -62,8 +61,7 @@ const userSlice = createSlice({
         },
         addWishlist(state, action) {
             const product = action.payload.product
-            const newProduct = {...product , isWhislist : true }
-            console.log(newProduct);
+            const newProduct = { ...product, isWhislist: true }
             state.wishlist = [...state.wishlist, newProduct];
             state.allProducts.find(
                 productList => productList.productId === newProduct.productId
@@ -85,7 +83,7 @@ const userSlice = createSlice({
                     productName: state.allProducts.find(product => product.productId === order.productId).productDesc,
                     productQauntity: order.productQuantity,
                     orderId: order.orderId,
-                    orderDate: order.orderDate,
+                    orderDate: order.orderDate.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
                     orderStatus: order.orderStatus,
                     paymentMode: order.paymentMode,
                     deliveredTill: order.orderShipmentDate

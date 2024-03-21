@@ -46,11 +46,22 @@ export const createNewCustomerService = (customerDetails) => {
                         '${customerDetails.customerGender}',
                         '${hashedPassword}' 
                         );`
-                connection.query(createCustomerQuery, function (err, result) {
+                connection.query(createCustomerQuery, async function (err, result) {
                     if (err) {
                         return reject({ message: err.message, status: 501 });
                     }
-                    resolve({ message: "Customer created Succesfully :)", result: result })
+                    const customer = await getCustomerByIdService(result.insertId);
+                    // Creating token
+                    const token = jwt.sign(
+                        {
+                            id: customer.result.customerId
+                        },
+                        process.env.JWT_SECRET,
+                        {
+                            expiresIn: "1h"
+                        }
+                    )
+                    resolve({ message: "Customer created Succesfully :)", result: customer.result , token })
                 });
             })
         } catch (error) {
@@ -88,7 +99,6 @@ export const getAllOrdersService = (customerId) => {
                         "PRODUCT_ID": "productId",
                         "PRODUCT_QUANTITY": "productQuantity"
                     }
-
                     result.map((order) => {
                         orders.push(mapNewKeys(order, newMapping))
                     })
@@ -206,8 +216,6 @@ export const updateCustomerService = (customerId, customerDetails) => {
         try {
             var oldCustomerDetails = await getCustomerByIdService(customerId);
             oldCustomerDetails = oldCustomerDetails.result
-            console.log(oldCustomerDetails, "old")
-            console.log(customerDetails, "new")
             const updateCustomerQuery = `UPDATE ONLINE_CUSTOMER 
             JOIN ADDRESS A ON A.ADDRESS_ID = ONLINE_CUSTOMER.ADDRESS_ID
             SET
