@@ -106,9 +106,21 @@
 }
 
 .wishlist-container{
+  text-align: center;
   cursor: pointer;
 }
 .wishlist-container:hover{
   scale: 1.1;
   transition-duration: 500ms;
+}
+
+@media only screen and (max-width: 600px) {
+  .nav-links {
+    font-size: 1em;
+    font-weight: 700;
+    padding: 10px 0;
+  }
+  .nav-new{
+    gap: 5px;
+  }
 }

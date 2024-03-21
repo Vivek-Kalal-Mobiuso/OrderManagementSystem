@@ -44,11 +44,12 @@ const Profile = () => {
           error: 'Something Went Wrong :(!',
         })
 
-        updatePromise.then((updatedCustomer)=>{
+        updatePromise.then((updatedCustomer) => {
           console.log(updatedCustomer);
-          dispatch(setUser({user : updatedCustomer , token}))
+          dispatch(setUser({ user: updatedCustomer, token }))
         })
-        navigate("/")
+        // navigate("/")
+        setIsEditable(false)
       } catch (error) {
 
       }
@@ -65,7 +66,7 @@ const Profile = () => {
       <Form className='border border-2 border-black rounded border-opacity-50 mt-3 p-3'>
         <div className='flex '>
           <Row>
-            <Col>
+            <Col className='col-sm-6 col-12'>
               <Form.Group className="mb-3" controlId="formFirstName">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
@@ -93,7 +94,7 @@ const Profile = () => {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className='col-sm-6 col-12'>
               <Form.Group className="mb-3" controlId="formEmailAddress">
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control
@@ -121,7 +122,7 @@ const Profile = () => {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className='col-sm-6 col-12'>
               <Form.Group className="mb-3" controlId="formCustomerUsername">
                 <Form.Label>UserName</Form.Label>
                 <Form.Control
@@ -173,7 +174,7 @@ const Profile = () => {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className='col-sm-6 col-12'>
               <Form.Group className="mb-3" controlId="formAddressLine1">
                 <Form.Label>AddressLine 1</Form.Label>
                 <Form.Control
@@ -201,7 +202,7 @@ const Profile = () => {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className='col-sm-6 col-12'>
               <Form.Group className="mb-3" controlId="formCity">
                 <Form.Label>City</Form.Label>
                 <Form.Control
@@ -229,7 +230,7 @@ const Profile = () => {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className='col-sm-6 col-12'>
               <Form.Group className="mb-3" controlId="formPincode">
                 <Form.Label>Pincode</Form.Label>
                 <Form.Control
@@ -273,7 +274,7 @@ const Profile = () => {
             onClick={() => {
               if (!isEditable) {
                 setIsEditable((prev) => !prev)
-              }else{
+              } else {
                 formik.handleSubmit()
               }
             }}

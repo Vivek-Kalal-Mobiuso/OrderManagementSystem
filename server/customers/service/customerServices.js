@@ -204,8 +204,10 @@ export const deleteCustomerByIdService = (customerId) => {
 export const updateCustomerService = (customerId, customerDetails) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const oldCustomerDetails = await getCustomerByIdService(customerId);
-
+            var oldCustomerDetails = await getCustomerByIdService(customerId);
+            oldCustomerDetails = oldCustomerDetails.result
+            console.log(oldCustomerDetails, "old")
+            console.log(customerDetails, "new")
             const updateCustomerQuery = `UPDATE ONLINE_CUSTOMER 
             JOIN ADDRESS A ON A.ADDRESS_ID = ONLINE_CUSTOMER.ADDRESS_ID
             SET
@@ -219,24 +221,25 @@ export const updateCustomerService = (customerId, customerDetails) => {
                 CITY = ? ,
                 STATE = ? ,
                 PINCODE = ? ,
-                COUNTRY = ? 
-                ${oldCustomerDetails.customerEmail === customerDetails.customerEmail ? 'CUSTOMER_EMAIL = ? ,' : ''}
-            WHERE CUSTOMER_ID = ${customerId};`
+                COUNTRY = ? ,
+                CUSTOMER_EMAIL = ?
+                WHERE CUSTOMER_ID = ${customerId};`
+            // ${oldCustomerDetails.customerEmail === customerDetails.customerEmail ? 'CUSTOMER_EMAIL = ? ,' : ''}
 
-            // update address table also using joins
+            // update address table also using joins also update only those values which are being sent else take from old user values
             const values = [
-                customerDetails.customerFirstName,
-                customerDetails.customerLastName,
-                customerDetails.customerPhone,
-                customerDetails.customerUserName,
-                customerDetails.customerGender,
-                customerDetails.AddressLine1,
-                customerDetails.AddressLine2,
-                customerDetails.city,
-                customerDetails.state,
-                customerDetails.pincode,
-                customerDetails.country,
-                (oldCustomerDetails.customerEmail === customerDetails.customerEmail ? customerDetails.customerEmail : '')
+                customerDetails.customerFirstName || oldCustomerDetails.customerFirstName,
+                customerDetails.customerLastName || oldCustomerDetails.customerLastName,
+                customerDetails.customerPhone || oldCustomerDetails.customerPhone,
+                customerDetails.customerUserName || oldCustomerDetails.customerUserName,
+                customerDetails.customerGender || oldCustomerDetails.customerGender,
+                customerDetails.AddressLine1 || oldCustomerDetails.addressLine1,
+                customerDetails.AddressLine2 || oldCustomerDetails.addressLine2,
+                customerDetails.city || oldCustomerDetails.city,
+                customerDetails.state || oldCustomerDetails.state,
+                customerDetails.pincode || oldCustomerDetails.pincode,
+                customerDetails.country || oldCustomerDetails.country,
+                customerDetails.customerEmail || oldCustomerDetails.customerEmail
             ]
 
             connection.query(updateCustomerQuery, values, async (error, result) => {
@@ -248,7 +251,7 @@ export const updateCustomerService = (customerId, customerDetails) => {
                 // If Customer is Updated fetch the updated value and send it
                 const updatedCustomer = await getCustomerByIdService(customerId);
 
-                resolve({ message: "Customer Updated Successfully",  updatedCustomer })
+                resolve({ message: "Customer Updated Successfully", updatedCustomer })
             })
         } catch (error) {
             return reject({ message: "Internal Server Error... " + error.message })

@@ -10,13 +10,14 @@ import { toast } from 'react-toastify';
 
 function CardBox({ product }) {
   const dispatch = useDispatch();
-  const [isClick, setClick] = useState(false);
+  console.log(product.isWhislist);
+  const [isClick, setClick] = useState(product.isWhislist || false);
   const [rating, setRating] = useState(0)
 
 
   // Functions
   const handleWishlist = () => {
-    // console.log(isClick);
+    // product.isWishList = !product.isWishList
     if (isClick) {
       toast.success("Removed from Wishlist")
       dispatch(removeFromWishlist(product.productId))
@@ -31,17 +32,24 @@ function CardBox({ product }) {
     setRating(rate)
     console.log(rate);
 
-    // other logic
+    // other logicx 
   }
   // Optinal callback functions
   const onPointerEnter = () => console.log('Enter')
   const onPointerLeave = () => console.log('Leave')
   const onPointerMove = (value, index) => console.log(value, index)
 
+  const handleAddToCart = () => {
+    dispatch(usersCart({ product: { ...product, liked: isClick } }))
+    toast.success("Added To Cart")
+  }
+
   return (
     <Card style={{ width: '18rem', }} className='shadow position-relative'>
-      <Card.Img variant="top" src={productImg} alt='picture' />
-      <div className='position-absolute heart'>
+      <div className='overflow-hidden'>
+        <Card.Img variant="top" src={productImg} alt='picture' className='card-img' />
+      </div>
+      <div className='position-absolute heart overflow-hidden'>
         <Heart isClick={isClick} onClick={handleWishlist} />
       </div>
       <Card.Body>
@@ -59,15 +67,16 @@ function CardBox({ product }) {
             onPointerEnter={onPointerEnter}
             onPointerLeave={onPointerLeave}
             onPointerMove={onPointerMove}
-          /* Available Props */
-          size="22"
+            /* Available Props */
+            size="22"
           />
         </div>
 
         <div className="d-flex justify-content-between">
-          {/* <Button variant="primary" className=''>Buy</Button> */}
-          <button className="button-27" onClick={() => dispatch(usersCart({ product: { ...product, liked: isClick } }))}>Add To Cart</button>
-          <button className="button-64"><span className="text">Buy</span></button>
+          <button class="button-6" onClick={handleAddToCart}>Add To Cart</button>
+          <button class="button-5">Buy Now</button>
+
+          {/* <button className="button-64"><span className="text">Buy</span></button> */}
         </div>
       </Card.Body>
     </Card>

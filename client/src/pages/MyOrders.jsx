@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { motion } from "framer-motion"
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -8,6 +8,7 @@ import { setOrders } from '../store/slice/UserSlice';
 import Lottie from 'lottie-react';
 import loading from "../animations/loading.json"
 import MyOrderCard from '../components/MyOrderCard';
+import "../css/homepage.css"
 
 const MyOrders = () => {
   // States
@@ -33,6 +34,10 @@ const MyOrders = () => {
     getOrders();
   }, [])
 
+  useEffect(() => {
+
+  }, [myOrders])
+  
   return (
     <>
       {

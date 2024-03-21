@@ -62,7 +62,12 @@ const userSlice = createSlice({
         },
         addWishlist(state, action) {
             const product = action.payload.product
-            state.wishlist = [...state.wishlist, product];
+            const newProduct = {...product , isWhislist : true }
+            console.log(newProduct);
+            state.wishlist = [...state.wishlist, newProduct];
+            state.allProducts.find(
+                productList => productList.productId === newProduct.productId
+            ).isWhislist = true;
         },
         removeFromWishlist(state, action) {
             const productId = action.payload

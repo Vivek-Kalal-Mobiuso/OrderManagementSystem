@@ -158,7 +158,7 @@ export const deleteOrderByIdService = (orderId) => {
                 }
                 if (result.length === 0) return reject({ message: "Order Not Found", status: 400 })
 
-                resolve({ message: "Order Deleted Successfully", result })
+                resolve({ message: "Order Cancelled Successfully", result })
             })
         } catch (error) {
             return reject({ message: "Internal Server Error" })

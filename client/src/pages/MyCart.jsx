@@ -103,7 +103,7 @@ const MyCart = () => {
         <h1>Your Grand Total is : {total}</h1>
         {/* <Button variant='success' onClick={handleCheckout}>Checkout</Button> */}
         <Button variant='success'
-          // onClick={makePayment} 
+          onClick={makePayment} 
           style={{ width: "200px", height: "50px" }}>Checkout</Button>
       </div>
     </Container>
